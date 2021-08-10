@@ -114,12 +114,20 @@ HOOKS="base udev resume autodetect modconf block filesystems keyboard fsck"
 ```
 Regenerate presets `mkinitcpio -P`
 
-Create `conf` files to disable `suspend` (in cause of some bugs with S4) and enable `hibernate`. For example:
+Create `/etc/systemd/sleep.conf.d` files to disable `suspend` (in cause of some bugs with S4) and enable `hibernate`. For example:
 ```
 #suspend.conf
+[Sleep]
+AllowSuspend=no
+#SuspendMode=
+#SuspendState=mem standby freeze
 ```
 ```
 #hibernate.conf
+[Sleep]
+AllowHibernation=yes
+HibernateMode=shutdown
+HibernateState=disk
 ```
 
 ### Install NotoFonts system-wide:
@@ -127,5 +135,24 @@ Create `conf` files to disable `suspend` (in cause of some bugs with S4) and ena
 `pacman -S noto-fonts noto-fonts-cjk`
 
 Create `/etc/fonts/local.conf` file and add aliases:
-```
+```XML
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+<fontconfig>
+
+	<!-- Override global fonts -->
+	<alias>
+		<family>sans-serif</family>
+		<prefer><family>Noto Sans</family></prefer>
+	</alias>
+	<alias>
+		<family>serif</family>
+		<prefer><family>Noto Serif</family></prefer>
+	</alias>
+	<alias>
+		<family>monospace</family>
+		<prefer><family>Noto Sans Mono</family></prefer>
+	</alias>
+
+</fontconfig>
 ```
