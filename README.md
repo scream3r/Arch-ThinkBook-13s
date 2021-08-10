@@ -2,7 +2,7 @@
 
 ### Create partitions:
 
-`cfdisk /dev/sda`
+`cfdisk /dev/nvme0n1`
 
 * efi 1G
 * swap 24G
@@ -11,16 +11,16 @@
 ### Format partitions:
 
 ```
-mkfs.fat -F32 /dev/sda1
-mkfs.ext4 /dev/sda3
-mkswap /dev/sda2
+mkfs.fat -F32 /dev/nvme0n1p1
+mkfs.ext4 /dev/nvme0n1p3
+mkswap /dev/nvme0n1p2
 ```
 
 ### Mount root partition and enable swap:
 
 ```
-mount /dev/sda3 /mnt
-swapon /dev/sda2
+mount /dev/nvme0n1p3 /mnt
+swapon /dev/nvme0n1p2
 ```
 
 ### Make basic Arch installation:
