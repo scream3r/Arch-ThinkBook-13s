@@ -108,7 +108,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="resume=UUID=<UUID_of_partition>"
 ```
 Rebuild GRUB config `grub-mkconfig -o /boot/grub/grub.cfg`
 
-Edit `/etc/mkinitcpio.conf` file and add `resume` to HOOKS. Fo example:
+Edit `/etc/mkinitcpio.conf` file and add `resume` to HOOKS. For example:
 ```
 HOOKS="base udev resume autodetect modconf block filesystems keyboard fsck"
 ```
